@@ -154,17 +154,3 @@ function delayedMessage(msg) {
     console.log(msg); // msg is preserved via closure
   }, 1000);
 }
-
-/*
-=========================================
-CORE IDEA OF CLOSURES (VERY IMPORTANT)
-=========================================
-
-A closure means:
-A function "remembers" variables from its outer scope
-even after that outer function has finished execution.
-
-Think of it like:
-
-function + memory of its environment = closure
-*/
