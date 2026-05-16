@@ -1,8 +1,10 @@
 var x = 23;
+console.log(window.x); // Prints 23 in browser
 // Global object
 // let and const can be accessed anywhere in the script but hidden bu global object
 
 function myFunc() {
+  var x = 43; // Creates a new variable x = 43 inside the function
   if (true) {
     var a = 10;
     let b = 20;
