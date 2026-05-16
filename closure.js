@@ -68,3 +68,103 @@ console.log(myFunc());
 // num2 = 4 → temp = 2 + 4 = 6
 // num2 becomes 5
 // Output: 6
+
+// ===============================
+// WHY CLOSURES ARE USED IN JS
+// ===============================
+
+/*
+1. Preserve state without using global variables
+
+Without closures, you'd need global variables:
+- These can be modified by any part of the code
+- This leads to bugs and poor control
+
+Closures allow "private state"
+*/
+
+function counter() {
+  let count = 0;
+
+  return function () {
+    count++; // value is preserved between calls
+    return count;
+  };
+}
+
+/*
+2. Create private variables (encapsulation)
+
+JavaScript does NOT have true private variables (in older syntax),
+so closures are used to hide data from outside access.
+*/
+
+function bankAccount() {
+  let balance = 1000; // private variable
+
+  return {
+    deposit(amount) {
+      balance += amount;
+      return balance;
+    },
+    getBalance() {
+      return balance;
+    },
+  };
+}
+
+/*
+3. Function factories (custom behavior generators)
+
+Closures allow functions to "remember" configuration values.
+*/
+
+function multiplier(x) {
+  return function (y) {
+    return x * y; // x is remembered from outer function
+  };
+}
+
+/*
+4. Caching / memoization
+
+Closures help store previous results without global variables.
+*/
+
+function memo() {
+  let cache = {};
+
+  return function (n) {
+    if (cache[n]) return cache[n];
+
+    cache[n] = n * n; // pretend expensive computation
+    return cache[n];
+  };
+}
+
+/*
+5. Required for async operations (setTimeout, promises, callbacks)
+
+Variables are still needed after outer function finishes,
+so closures keep them alive.
+*/
+
+function delayedMessage(msg) {
+  setTimeout(function () {
+    console.log(msg); // msg is preserved via closure
+  }, 1000);
+}
+
+/*
+=========================================
+CORE IDEA OF CLOSURES (VERY IMPORTANT)
+=========================================
+
+A closure means:
+A function "remembers" variables from its outer scope
+even after that outer function has finished execution.
+
+Think of it like:
+
+function + memory of its environment = closure
+*/
